@@ -3,17 +3,14 @@
 mod maps;
 mod weapons;
 
-use std::fmt::Display;
-
 use eframe::{
     egui::{self, RichText},
     NativeOptions,
 };
 use maps::MAPS;
-use rand::{distributions::Standard, prelude::Distribution, Rng};
 use weapons::{get_weapons, RandomizeList};
 
-use anyhow::{Context, Result};
+use anyhow::Result;
 use winapi::um::winuser::{self, MessageBoxW};
 
 #[derive(Debug, Default)]
@@ -47,7 +44,7 @@ impl App {
 }
 
 impl eframe::App for App {
-    fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
+    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
             if self.error.is_some() {
                 let popup = egui::Window::new("Error").collapsible(false);

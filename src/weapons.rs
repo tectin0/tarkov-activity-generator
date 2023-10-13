@@ -1,5 +1,3 @@
-use std::{ops::Deref, slice::SliceIndex};
-
 use anyhow::{Context, Result};
 
 use rand::Rng;
@@ -46,16 +44,14 @@ pub(crate) fn get_weapons() -> Result<RandomizeList> {
                 None => return String::new(),
             };
 
-            let mut split = html.split("\"");
+            let mut split = html.split('\"');
 
             let weapon = match split.next() {
                 Some(x) => x,
                 None => return String::new(),
             };
 
-            let weapon = weapon.replace("&quot;", r#"'"#);
-
-            weapon
+            weapon.replace("&quot;", r#"'"#)
         })
         .collect::<Vec<String>>();
 
